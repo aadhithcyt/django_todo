@@ -1,0 +1,13 @@
+<h2>{% if todo %}Edit{% else %}Add{% endif %} To-Do</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="subject" placeholder="Subject"
+         value="{{ todo.subject|default:'' }}" required><br><br>
+
+  <textarea name="notes" placeholder="Notes">{{ todo.notes|default:'' }}</textarea><br><br>
+
+  <button type="submit">Save</button>
+</form>
+
+<a href="/">Back</a>

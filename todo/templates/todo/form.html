@@ -1,0 +1,32 @@
+{% extends 'todo/base.html' %}
+{% block title %}Add / Edit{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h4 class="mb-3">
+            {% if todo %}Edit To-Do{% else %}Add New To-Do{% endif %}
+        </h4>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Subject</label>
+                <input type="text" name="subject" class="form-control"
+                       value="{{ todo.subject|default:'' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Notes</label>
+                <textarea name="notes" class="form-control" rows="4" required>{{ todo.notes|default:'' }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save</button>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
